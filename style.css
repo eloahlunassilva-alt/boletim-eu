@@ -270,4 +270,17 @@ input.campo-invalido {
 
 .edicao-grid {
     display: grid;
-    grid
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+}
+
+.modal-acoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.modal-acoes .btn {
+    width: auto;
+}

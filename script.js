@@ -362,4 +362,39 @@ async function tratarSalvarDados(event) {
     btnSalvar.disabled = true;
 
     try {
-        const
+        const response = await fetch(`${CONFIG_ALUNO.apiUrl}/api/v1/boletins/salvar`, {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                turma: CONFIG_ALUNO.turma,
+                numero_chamada: CONFIG_ALUNO.numeroChamada,
+                pin: sessaoPin,
+                dados: {
+                    disciplinas: novosDados
+                }
+            })
+        });
+
+        if (!response.ok) {
+            modalMensagem.className = "mensagem erro";
+            modalMensagem.textContent = "Falha ao salvar alterações no servidor. Tente novamente.";
+            btnSalvar.disabled = false;
+            return;
+        }
+
+        dadosAtuais = novosDados;
+        renderizarTabelaECards();
+        modalMensagem.className = "mensagem sucesso";
+        modalMensagem.textContent = "Dados salvos com sucesso.";
+        btnSalvar.disabled = false;
+
+        setTimeout(() => {
+            fecharModalEdicao();
+        }, 1200);
+
+    } catch (error) {
+        modalMensagem.className = "mensagem erro";
+        modalMensagem.textContent = "Erro de conexão ao salvar os dados. Tente novamente.";
+        btnSalvar.disabled = false;
+    }
+}
