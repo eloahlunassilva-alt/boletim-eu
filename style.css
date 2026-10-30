@@ -1,13 +1,15 @@
-/* Variáveis de Cores e Estilos */
+/* Variáveis de Cores e Animações */
 :root {
-    --bg-degrade: linear-gradient(135deg, #051a10 0%, #0d2818 35%, #2d0a10 70%, #1a0307 100%);
-    --card-bg: rgba(15, 23, 42, 0.55);
-    --card-border: rgba(57, 255, 20, 0.2);
-    --text-color: #f8fafc;
-    --text-muted: #94a3b8;
+    --bg-degrade: linear-gradient(135deg, #021a0e 0%, #08381e 35%, #4a0817 70%, #200208 100%);
+    --card-bg: rgba(6, 38, 20, 0.45);
+    --card-border: rgba(57, 255, 20, 0.4);
+    --text-color: #ffffff;
+    --text-muted: #a3b8cc;
     --neon-green: #39ff14;
-    --neon-green-glow: rgba(57, 255, 20, 0.4);
-    --attention-color: #ff3366;
+    --neon-green-glow: rgba(57, 255, 20, 0.7);
+    --lava-red-1: rgba(220, 20, 60, 0.55);
+    --lava-red-2: rgba(139, 0, 0, 0.65);
+    --attention-color: #ff2a5f;
     --radius: 16px;
 }
 
@@ -25,11 +27,43 @@ body {
     line-height: 1.6;
     padding: 20px;
     min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Fundo com Brilhos/Estrelas Piscando */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(2px 2px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 40px 70px, var(--neon-green), rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 90px 40px, #ffffff, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 160px 120px, var(--neon-green), rgba(0,0,0,0)),
+        radial-gradient(1.5px 1.5px at 230px 190px, #ff3366, rgba(0,0,0,0)),
+        radial-gradient(2px 2px at 310px 80px, #ffffff, rgba(0,0,0,0));
+    background-repeat: repeat;
+    background-size: 350px 350px;
+    opacity: 0.6;
+    animation: piscarBrilhos 4s infinite alternate ease-in-out;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes piscarBrilhos {
+    0% { opacity: 0.3; transform: scale(0.98); }
+    100% { opacity: 0.8; transform: scale(1.02); }
 }
 
 .container {
     max-width: 1000px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
 }
 
 /* Cabeçalho */
@@ -39,15 +73,16 @@ body {
 }
 
 .header h1 {
-    font-size: 2.4rem;
+    font-size: 2.5rem;
     color: #ffffff;
-    text-shadow: 0 0 10px var(--neon-green-glow);
+    text-shadow: 0 0 15px var(--neon-green-glow), 0 0 30px var(--neon-green-glow);
 }
 
 .subtitulo {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     color: var(--neon-green);
-    font-weight: 600;
+    font-weight: bold;
+    text-shadow: 0 0 8px var(--neon-green-glow);
 }
 
 .estudante-info {
@@ -61,21 +96,64 @@ body {
     font-weight: bold;
 }
 
-/* Cards com efeito de vidro (Glassmorphism) */
+/* Cards com Efeito Lâmpada de Lava (Vinho/Vermelho se mexendo no verde) */
 .card {
+    position: relative;
     background: var(--card-bg);
     border-radius: var(--radius);
     padding: 20px;
     border: 1px solid var(--card-border);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    transition: transform 0.2s, border-color 0.2s;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(57, 255, 20, 0.15);
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    overflow: hidden;
+}
+
+/* Bolhas de Lava Animadas dentro do Card */
+.card::after, .card::before {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(25px);
+    z-index: -1;
+    animation: mexerLava 8s infinite alternate ease-in-out;
+}
+
+.card::before {
+    width: 120px;
+    height: 120px;
+    background: var(--lava-red-1);
+    top: -20px;
+    left: -20px;
+}
+
+.card::after {
+    width: 140px;
+    height: 140px;
+    background: var(--lava-red-2);
+    bottom: -30px;
+    right: -30px;
+    animation-duration: 11s;
+    animation-delay: -3s;
+}
+
+@keyframes mexerLava {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+    50% {
+        transform: translate(60px, 40px) scale(1.3);
+    }
+    100% {
+        transform: translate(-30px, 50px) scale(0.9);
+    }
 }
 
 .card:hover {
     border-color: var(--neon-green);
-    transform: translateY(-2px);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 35px 0 rgba(0, 0, 0, 0.6), 0 0 20px var(--neon-green-glow);
 }
 
 .cards-resumo {
@@ -98,7 +176,7 @@ body {
 }
 
 .valor-card {
-    font-size: 1.8rem;
+    font-size: 1.9rem;
     font-weight: bold;
 }
 
@@ -109,18 +187,20 @@ body {
     margin-top: 2px;
 }
 
-/* Efeitos Neon e Status */
+/* Textos em Neon e Cores de Status */
 .neon-text {
     color: var(--neon-green);
-    text-shadow: 0 0 8px var(--neon-green-glow);
+    text-shadow: 0 0 10px var(--neon-green-glow);
 }
 
 .status-bom {
     color: var(--neon-green);
+    text-shadow: 0 0 8px var(--neon-green-glow);
 }
 
 .status-atencao {
     color: var(--attention-color);
+    text-shadow: 0 0 8px rgba(255, 42, 95, 0.6);
 }
 
 /* Tabela Responsiva */
@@ -129,8 +209,8 @@ body {
     border-radius: var(--radius);
     padding: 24px;
     border: 1px solid var(--card-border);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
     margin-bottom: 30px;
 }
 
@@ -138,6 +218,7 @@ body {
     font-size: 1.3rem;
     margin-bottom: 16px;
     color: #ffffff;
+    text-shadow: 0 0 8px var(--neon-green-glow);
 }
 
 .tabela-responsive {
@@ -154,14 +235,15 @@ body {
 .tabela-boletim td {
     padding: 12px 14px;
     text-align: left;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(57, 255, 20, 0.15);
 }
 
 .tabela-boletim th {
-    background-color: rgba(255, 255, 255, 0.03);
+    background-color: rgba(57, 255, 20, 0.08);
     color: var(--neon-green);
-    font-weight: 600;
+    font-weight: bold;
     font-size: 0.9rem;
+    text-shadow: 0 0 5px var(--neon-green-glow);
 }
 
 .tabela-boletim td {
@@ -169,5 +251,5 @@ body {
 }
 
 .tabela-boletim tbody tr:hover {
-    background-color: rgba(57, 255, 20, 0.05);
+    background-color: rgba(57, 255, 20, 0.12);
 }
