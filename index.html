@@ -1,11 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Boletim Digital</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    meu boletim
+    <div class="container">
+        <header class="header">
+            <h1>Boletim Digital</h1>
+            <p>Acompanhamento Escolar</p>
+        </header>
+
+        <section id="login-section" class="card login-card">
+            <h2>Acesso ao Boletim</h2>
+            <div class="info-aluno">
+                <p><strong>Turma:</strong> <span id="info-turma">9B</span></p>
+                <p><strong>Chamada:</strong> <span id="info-chamada">11</span></p>
+            </div>
+            <form id="form-login">
+                <div class="form-group">
+                    <label for="pin-input">Digite seu PIN:</label>
+                    <input type="password" id="pin-input" maxlength="10" placeholder="PIN de acesso" required autocomplete="off">
+                </div>
+                <button type="submit" id="btn-entrar" class="btn primary">Entrar</button>
+            </form>
+            <div id="login-mensagem" class="mensagem"></div>
+        </section>
+
+        <main id="boletim-section" class="boletim-content hidden">
+            <div class="aluno-bar card">
+                <div>
+                    <h2>Estudante #11</h2>
+                    <p>Turma: 9B</p>
+                </div>
+                <button id="btn-alterar" class="btn secondary">Alterar dados</button>
+            </div>
+
+            <section class="cards-resumo">
+                <div class="card summary-card">
+                    <h3>Média Geral</h3>
+                    <p id="media-geral" class="destaque">-</p>
+                </div>
+                <div class="card summary-card">
+                    <h3>Total de Faltas</h3>
+                    <p id="total-faltas" class="destaque">-</p>
+                </div>
+                <div class="card summary-card">
+                    <h3>Situação</h3>
+                    <p id="situacao-geral" class="destaque">-</p>
+                </div>
+            </section>
+
+            <section class="card tabela-container">
+                <h3>Notas e Faltas por Disciplina</h3>
+                <div class="table-responsive">
+                    <table class="tabela-boletim">
+                        <thead>
+                            <tr>
+                                <th>Disciplina</th>
+                                <th>1º Trim</th>
+                                <th>2º Trim</th>
+                                <th>3º Trim</th>
+                                <th>Média</th>
+                                <th>Faltas</th>
+                                <th>Situação</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabela-corpo">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+
+        <div id="modal-edicao" class="modal hidden">
+            <div class="modal-content card">
+                <h2>Editar Notas e Faltas</h2>
+                <p id="modal-mensagem" class="mensagem"></p>
+                <form id="form-edicao">
+                    <div id="container-campos-edicao"></div>
+                    <div class="modal-acoes">
+                        <button type="button" id="btn-cancelar" class="btn secondary">Cancelar</button>
+                        <button type="submit" id="btn-salvar" class="btn primary">Salvar alterações</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
