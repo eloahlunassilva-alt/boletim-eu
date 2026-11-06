@@ -34,59 +34,83 @@
     </div>
 
     <div class="container">
-        <!-- Cabeçalho Principal -->
-        <header class="header">
-            <h1>Boletim Digital</h1>
-            <p class="subtitulo">9º Ano — Ensino Fundamental</p>
-            <p class="estudante-info">Estudante: <span>Estudante Exemplo</span></p>
-        </header>
-
-        <!-- Área Superior com Cards de Resumo -->
-        <section class="cards-resumo">
-            <div class="card">
-                <h3>Média Geral</h3>
-                <p id="media-geral" class="valor-card neon-text">-</p>
+        <!-- ÁREA DE LOGIN (PIN) -->
+        <section id="area-login" class="card login-card">
+            <h2>Acesso ao Boletim</h2>
+            <div class="login-info">
+                <p>Série: <span>9º Ano</span> | Turma: <span>9B</span> | Nº: <span>10</span></p>
             </div>
-            <div class="card">
-                <h3>Total de Faltas</h3>
-                <p id="total-faltas" class="valor-card">-</p>
+            <div class="login-form">
+                <input type="password" id="input-pin" placeholder="Digite seu PIN" maxlength="20" autocomplete="off">
+                <button type="button" id="btn-entrar">Entrar</button>
             </div>
-            <div class="card">
-                <h3>Bom Desempenho</h3>
-                <p id="qtd-bom-desempenho" class="valor-card status-bom">-</p>
-            </div>
-            <div class="card">
-                <h3>Atenção</h3>
-                <p id="qtd-atencao" class="valor-card status-atencao">-</p>
-            </div>
-            <div class="card">
-                <h3>Frequência Geral</h3>
-                <p class="valor-card neon-text">92%</p>
-                <span class="subtexto">Frequência adequada</span>
-            </div>
+            <p id="msg-login" class="msg-status"></p>
         </section>
 
-        <!-- Tabela com Notas e Disciplinas -->
-        <section class="tabela-section card-tabela card">
-            <h2>Notas e Faltas por Componente Curricular</h2>
-            <div class="tabela-responsive">
-                <table class="tabela-boletim">
-                    <thead>
-                        <tr>
-                            <th>Componente Curricular</th>
-                            <th>1º Tri</th>
-                            <th>2º Tri</th>
-                            <th>3º Tri</th>
-                            <th>Média</th>
-                            <th>Faltas</th>
-                            <th>Situação</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tabela-corpo">
-                    </tbody>
-                </table>
-            </div>
-        </section>
+        <!-- CONTEÚDO DO BOLETIM (OCULTO INICIALMENTE) -->
+        <div id="conteudo-boletim" style="display: none;">
+            <!-- Cabeçalho Principal -->
+            <header class="header">
+                <h1>Boletim Digital</h1>
+                <p class="subtitulo">9º Ano — Ensino Fundamental</p>
+                <p class="estudante-info">Estudante: <span>Turma 9B - Nº 10</span></p>
+            </header>
+
+            <!-- Área Superior com Cards de Resumo -->
+            <section class="cards-resumo">
+                <div class="card">
+                    <h3>Média Geral</h3>
+                    <p id="media-geral" class="valor-card neon-text">-</p>
+                </div>
+                <div class="card">
+                    <h3>Total de Faltas</h3>
+                    <p id="total-faltas" class="valor-card">-</p>
+                </div>
+                <div class="card">
+                    <h3>Bom Desempenho</h3>
+                    <p id="qtd-bom-desempenho" class="valor-card status-bom">-</p>
+                </div>
+                <div class="card">
+                    <h3>Atenção</h3>
+                    <p id="qtd-atencao" class="valor-card status-atencao">-</p>
+                </div>
+                <div class="card">
+                    <h3>Frequência Geral</h3>
+                    <p class="valor-card neon-text">92%</p>
+                    <span class="subtexto">Frequência adequada</span>
+                </div>
+            </section>
+
+            <!-- Tabela com Notas e Disciplinas -->
+            <section class="tabela-section card-tabela card">
+                <div class="tabela-header">
+                    <h2>Notas e Faltas por Componente Curricular</h2>
+                    <button type="button" id="btn-alterar-dados" class="btn-acao">Alterar dados</button>
+                </div>
+                <p id="msg-boletim" class="msg-status"></p>
+                <div class="tabela-responsive">
+                    <table class="tabela-boletim">
+                        <thead>
+                            <tr>
+                                <th>Componente Curricular</th>
+                                <th>1º Tri</th>
+                                <th>2º Tri</th>
+                                <th>3º Tri</th>
+                                <th>Média</th>
+                                <th>Faltas</th>
+                                <th>Situação</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabela-corpo">
+                        </tbody>
+                    </table>
+                </div>
+                <div id="area-botoes-edicao" style="display: none; margin-top: 15px; text-align: right;">
+                    <button type="button" id="btn-salvar" class="btn-acao btn-salvar">Salvar alterações</button>
+                    <button type="button" id="btn-cancelar" class="btn-acao btn-cancelar">Cancelar</button>
+                </div>
+            </section>
+        </div>
     </div>
 
     <script src="script.js"></script>

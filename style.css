@@ -137,7 +137,8 @@ body::before {
 .status-atencao { color: var(--attention-color); text-shadow: 0 0 8px rgba(255, 73, 118, 0.6); }
 
 /* Tabela de Fontaine */
-.card-tabela h2 { font-size: 1.3rem; margin-bottom: 16px; text-shadow: 0 0 10px var(--hydro-blue-glow); }
+.card-tabela h2 { font-size: 1.3rem; text-shadow: 0 0 10px var(--hydro-blue-glow); }
+.tabela-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
 .tabela-responsive { overflow-x: auto; }
 
 .tabela-boletim {
@@ -166,4 +167,113 @@ body::before {
 
 .tabela-boletim tbody tr:hover {
     background: rgba(0, 210, 255, 0.15);
+}
+
+/* Estilos de Login e Edição */
+.login-card {
+    max-width: 420px;
+    margin: 60px auto;
+    text-align: center;
+}
+
+.login-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 12px;
+    color: #ffffff;
+    text-shadow: 0 0 12px var(--hydro-blue-glow);
+}
+
+.login-info {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+}
+
+.login-info span {
+    color: var(--hydro-blue);
+    font-weight: bold;
+}
+
+.login-form {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.login-form input, .input-edicao {
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--hydro-blue);
+    background: rgba(1, 10, 23, 0.8);
+    color: #ffffff;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.login-form input:focus, .input-edicao:focus {
+    border-color: var(--furina-gold);
+    box-shadow: 0 0 10px var(--furina-gold-glow);
+}
+
+.login-form input {
+    width: 180px;
+    text-align: center;
+}
+
+.btn-acao {
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #00d2ff 0%, #0055ff 100%);
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-acao:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 12px var(--hydro-blue-glow);
+}
+
+.btn-salvar {
+    background: linear-gradient(135deg, #00d2ff 0%, #00b0ff 100%);
+}
+
+.btn-cancelar {
+    background: rgba(255, 255, 255, 0.15);
+    margin-left: 10px;
+}
+
+.btn-cancelar:hover {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.msg-status {
+    margin-top: 14px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    min-height: 22px;
+}
+
+.msg-erro {
+    color: var(--attention-color);
+    text-shadow: 0 0 8px rgba(255, 73, 118, 0.6);
+}
+
+.msg-sucesso {
+    color: var(--hydro-blue);
+    text-shadow: 0 0 8px var(--hydro-blue-glow);
+}
+
+.input-edicao {
+    width: 65px;
+    text-align: center;
+    padding: 4px 6px;
+}
+
+.input-invalido {
+    border-color: var(--attention-color) !important;
+    box-shadow: 0 0 8px rgba(255, 73, 118, 0.8) !important;
 }
