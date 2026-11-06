@@ -1,4 +1,3 @@
-/* Variáveis de Cores e Animações */
 :root {
     --bg-degrade: linear-gradient(135deg, #021a0e 0%, #08381e 35%, #4a0817 70%, #200208 100%);
     --card-bg: rgba(6, 38, 20, 0.85);
@@ -10,267 +9,121 @@
     --radius: 16px;
 }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background: var(--bg-degrade);
-    background-attachment: fixed;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg-degrade) fixed;
     color: var(--text-color);
     line-height: 1.6;
     padding: 20px;
     min-height: 100vh;
-    position: relative;
     overflow-x: hidden;
 }
 
-/* Fundo com Brilhos/Estrelas Piscando */
+/* Fundo Estrelado */
 body::before {
     content: "";
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     background-image: 
-        radial-gradient(2px 2px at 20px 30px, #ffffff, rgba(0,0,0,0)),
-        radial-gradient(2.5px 2.5px at 50px 80px, var(--neon-green), rgba(0,0,0,0)),
-        radial-gradient(1.5px 1.5px at 120px 40px, #ffffff, rgba(0,0,0,0)),
-        radial-gradient(2px 2px at 180px 140px, var(--neon-green), rgba(0,0,0,0)),
-        radial-gradient(2px 2px at 260px 190px, #ff3366, rgba(0,0,0,0)),
-        radial-gradient(1.5px 1.5px at 320px 90px, #ffffff, rgba(0,0,0,0));
-    background-repeat: repeat;
+        radial-gradient(2px 2px at 20px 30px, #fff, transparent),
+        radial-gradient(2.5px 2.5px at 50px 80px, var(--neon-green), transparent),
+        radial-gradient(1.5px 1.5px at 120px 40px, #fff, transparent),
+        radial-gradient(2px 2px at 260px 190px, #ff3366, transparent);
     background-size: 350px 350px;
     opacity: 0.7;
-    animation: piscarBrilhos 3s infinite alternate ease-in-out;
+    animation: piscar 3s infinite alternate ease-in-out;
     pointer-events: none;
-    z-index: 0;
 }
 
-@keyframes piscarBrilhos {
-    0% { opacity: 0.3; transform: scale(0.98); }
-    100% { opacity: 0.9; transform: scale(1.02); }
+@keyframes piscar {
+    0% { opacity: 0.3; } 100% { opacity: 0.9; }
 }
 
-.container {
-    max-width: 1000px;
-    margin: 0 auto;
-    position: relative;
-    z-index: 1;
-}
+.container { max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
 
 /* Cabeçalho */
-.header {
-    text-align: center;
-    margin-bottom: 28px;
-}
+.header { text-align: center; margin-bottom: 28px; }
+.header h1 { font-size: 2.5rem; text-shadow: 0 0 15px var(--neon-green-glow); }
+.subtitulo { font-size: 1.15rem; color: var(--neon-green); font-weight: bold; text-shadow: 0 0 8px var(--neon-green-glow); }
+.estudante-info { color: var(--text-muted); font-size: 0.95rem; margin-top: 4px; }
+.estudante-info span { color: #fff; font-weight: bold; }
 
-.header h1 {
-    font-size: 2.5rem;
-    color: #ffffff;
-    text-shadow: 0 0 15px var(--neon-green-glow), 0 0 30px var(--neon-green-glow);
-}
-
-.subtitulo {
-    font-size: 1.15rem;
-    color: var(--neon-green);
-    font-weight: bold;
-    text-shadow: 0 0 8px var(--neon-green-glow);
-}
-
-.estudante-info {
-    color: var(--text-muted);
-    font-size: 0.95rem;
-    margin-top: 4px;
-}
-
-.estudante-info span {
-    color: #ffffff;
-    font-weight: bold;
-}
-
-/* Cards com Borda Lava Deslizando Retilínea (sem rotação de radar) */
-.card {
+/* Cards com Borda Lava Unificada */
+.card, .tabela-boletim tbody tr {
     position: relative;
     background: var(--card-bg);
     border-radius: var(--radius);
-    padding: 20px;
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
     transition: transform 0.3s, box-shadow 0.3s;
     z-index: 1;
 }
 
-/* Borda dos Cards com Efeito Lava Fluido ao longo do retângulo */
-.card::before {
+.card { padding: 20px; margin-bottom: 24px; }
+
+/* Animação da Borda de Lava Contínua (Retangular) */
+.card::before, .tabela-boletim tbody tr::before {
     content: "";
     position: absolute;
     inset: 0;
-    border-radius: var(--radius);
-    padding: 3px;
-    background: linear-gradient(
-        135deg,
-        #39ff14 0%,
-        #8b0021 25%,
-        #ff0055 50%,
-        #8b0021 75%,
-        #39ff14 100%
-    );
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(135deg, #39ff14 0%, #8b0021 25%, #ff0055 50%, #8b0021 75%, #39ff14 100%);
     background-size: 300% 300%;
-    animation: deslizarLavaRetangulo 8s infinite ease-in-out alternate;
-    -webkit-mask: 
-        linear-gradient(#fff 0 0) content-box, 
-        linear-gradient(#fff 0 0);
+    animation: deslizarLava 8s infinite ease-in-out alternate;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
 }
 
-@keyframes deslizarLavaRetangulo {
-    0% {
-        background-position: 0% 0%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 100%;
-    }
+@keyframes deslizarLava {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
 }
 
-.card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 35px 0 rgba(0, 0, 0, 0.7), 0 0 20px var(--neon-green-glow);
-}
+.card:hover { transform: translateY(-4px); box-shadow: 0 0 20px var(--neon-green-glow); }
 
-.cards-resumo {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-    gap: 16px;
-    margin-bottom: 24px;
-}
+.cards-resumo { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px; }
+.cards-resumo .card { text-align: center; margin-bottom: 0; }
+.cards-resumo h3 { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px; }
+.valor-card { font-size: 1.9rem; font-weight: bold; }
+.subtexto { display: block; font-size: 0.75rem; color: var(--text-muted); }
 
-.cards-resumo .card {
-    text-align: center;
-}
+/* Cores de Status */
+.neon-text, .status-bom { color: var(--neon-green); text-shadow: 0 0 8px var(--neon-green-glow); }
+.status-atencao { color: var(--attention-color); text-shadow: 0 0 8px rgba(255, 42, 95, 0.6); }
 
-.cards-resumo h3 {
-    font-size: 0.85rem;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 6px;
-}
-
-.valor-card {
-    font-size: 1.9rem;
-    font-weight: bold;
-}
-
-.subtexto {
-    display: block;
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    margin-top: 2px;
-}
-
-/* Textos Neon e Cores de Status */
-.neon-text {
-    color: var(--neon-green);
-    text-shadow: 0 0 10px var(--neon-green-glow);
-}
-
-.status-bom {
-    color: var(--neon-green);
-    text-shadow: 0 0 8px var(--neon-green-glow);
-}
-
-.status-atencao {
-    color: var(--attention-color);
-    text-shadow: 0 0 8px rgba(255, 42, 95, 0.6);
-}
-
-/* Tabela Responsiva */
-.card-tabela {
-    margin-bottom: 30px;
-}
-
-.card-tabela h2 {
-    font-size: 1.3rem;
-    margin-bottom: 16px;
-    color: #ffffff;
-    text-shadow: 0 0 8px var(--neon-green-glow);
-}
-
-.tabela-responsive {
-    overflow-x: auto;
-}
+/* Tabela com Borda Única por Linha/Matéria */
+.card-tabela h2 { font-size: 1.3rem; margin-bottom: 16px; text-shadow: 0 0 8px var(--neon-green-glow); }
+.tabela-responsive { overflow-x: auto; }
 
 .tabela-boletim {
     width: 100%;
     border-collapse: separate;
-    border-spacing: 0 8px; /* Espacamento para destacar cada linha/nota */
+    border-spacing: 0 10px;
     min-width: 600px;
 }
 
 .tabela-boletim th {
     padding: 12px 14px;
     text-align: left;
-    background-color: rgba(57, 255, 20, 0.08);
     color: var(--neon-green);
-    font-weight: bold;
     font-size: 0.9rem;
     text-shadow: 0 0 5px var(--neon-green-glow);
-    border-bottom: 2px solid var(--neon-green);
 }
 
-/* Aplicando o mesmo estilo de borda animada Lava nas células de notas */
+.tabela-boletim tbody tr {
+    border-radius: 10px;
+}
+
 .tabela-boletim td {
-    position: relative;
     padding: 12px 14px;
     font-size: 0.95rem;
-    background: rgba(6, 38, 20, 0.6);
 }
 
-.tabela-boletim tbody tr td:first-child {
-    border-top-left-radius: 8px;
-    border-bottom-left-radius: 8px;
-}
-
-.tabela-boletim tbody tr td:last-child {
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-}
-
-/* Moldura Lava individual em cada nota */
-.tabela-boletim td::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    padding: 1.5px;
-    border-radius: inherit;
-    background: linear-gradient(
-        135deg,
-        #39ff14 0%,
-        #8b0021 35%,
-        #ff0055 70%,
-        #39ff14 100%
-    );
-    background-size: 200% 200%;
-    animation: deslizarLavaRetangulo 6s infinite ease-in-out alternate;
-    -webkit-mask: 
-        linear-gradient(#fff 0 0) content-box, 
-        linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-}
-
-.tabela-boletim tbody tr:hover td {
-    background-color: rgba(57, 255, 20, 0.15);
+.tabela-boletim tbody tr:hover {
+    background: rgba(57, 255, 20, 0.12);
 }
