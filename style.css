@@ -93,7 +93,7 @@ body::before {
     font-weight: bold;
 }
 
-/* Cards com Borda em Estilo Lâmpada de Lava (Bolhas subindo na borda) */
+/* Cards com Borda Lava Deslizando Lento pelo Contorno */
 .card {
     position: relative;
     background: var(--card-bg);
@@ -107,41 +107,44 @@ body::before {
     z-index: 1;
 }
 
-/* O gradiente da borda com efeito lava fluido subindo */
+/* Gradiente Angular que gira bem devagar (14 segundos) contornando todas as bordas */
 .card::before {
     content: "";
     position: absolute;
-    inset: 0;
-    border-radius: var(--radius);
-    padding: 3px; /* Espessura da Borda */
-    background: linear-gradient(
-        180deg,
-        #39ff14 0%,
-        #8b0021 25%,
-        #ff0055 50%,
-        #8b0021 75%,
-        #39ff14 100%
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: conic-gradient(
+        from 0deg,
+        #39ff14 0deg,
+        #700018 70deg,
+        #ff0055 120deg,
+        #700018 170deg,
+        #39ff14 240deg,
+        #700018 310deg,
+        #39ff14 360deg
     );
-    background-size: 100% 300%;
-    animation: bolhasLavaBorda 5s infinite alternate ease-in-out;
-    -webkit-mask: 
-        linear-gradient(#fff 0 0) content-box, 
-        linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    z-index: 2;
-    pointer-events: none;
+    animation: andarLavaBorda 14s linear infinite;
+    z-index: -2;
 }
 
-@keyframes bolhasLavaBorda {
+/* Camada interna de recorte para manter o fundo transparente e deixar apenas a borda visível */
+.card::after {
+    content: "";
+    position: absolute;
+    inset: 3px; /* Espessura da borda viva */
+    background: var(--card-bg);
+    border-radius: calc(var(--radius) - 3px);
+    z-index: -1;
+}
+
+@keyframes andarLavaBorda {
     0% {
-        background-position: 0% 0%;
-    }
-    50% {
-        background-position: 0% 50%;
+        transform: rotate(0deg);
     }
     100% {
-        background-position: 0% 100%;
+        transform: rotate(360deg);
     }
 }
 
