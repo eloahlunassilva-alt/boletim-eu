@@ -1,11 +1,14 @@
+/* Tema Furina & Fontaine (Genshin Impact) */
 :root {
-    --bg-degrade: linear-gradient(135deg, #021a0e 0%, #08381e 35%, #4a0817 70%, #200208 100%);
-    --card-bg: rgba(6, 38, 20, 0.85);
+    --bg-degrade: linear-gradient(135deg, #031024 0%, #09254a 35%, #051633 70%, #010a17 100%);
+    --card-bg: rgba(9, 37, 74, 0.75);
     --text-color: #ffffff;
-    --text-muted: #a3b8cc;
-    --neon-green: #39ff14;
-    --neon-green-glow: rgba(57, 255, 20, 0.7);
-    --attention-color: #ff2a5f;
+    --text-muted: #9bc2e6;
+    --hydro-blue: #00d2ff;
+    --hydro-blue-glow: rgba(0, 210, 255, 0.75);
+    --furina-gold: #ffd700;
+    --furina-gold-glow: rgba(255, 215, 0, 0.7);
+    --attention-color: #ff4976;
     --radius: 16px;
 }
 
@@ -21,36 +24,38 @@ body {
     overflow-x: hidden;
 }
 
-/* Fundo Estrelado */
+/* Fundo com Brilhos de Bolhas e Gotas D'água (Fontaine) */
 body::before {
     content: "";
     position: fixed;
     inset: 0;
     background-image: 
-        radial-gradient(2px 2px at 20px 30px, #fff, transparent),
-        radial-gradient(2.5px 2.5px at 50px 80px, var(--neon-green), transparent),
-        radial-gradient(1.5px 1.5px at 120px 40px, #fff, transparent),
-        radial-gradient(2px 2px at 260px 190px, #ff3366, transparent);
-    background-size: 350px 350px;
-    opacity: 0.7;
-    animation: piscar 3s infinite alternate ease-in-out;
+        radial-gradient(2.5px 2.5px at 30px 40px, #ffffff, transparent),
+        radial-gradient(3px 3px at 70px 110px, var(--hydro-blue), transparent),
+        radial-gradient(2px 2px at 150px 50px, var(--furina-gold), transparent),
+        radial-gradient(3.5px 3.5px at 280px 210px, var(--hydro-blue), transparent),
+        radial-gradient(2px 2px at 340px 90px, #ffffff, transparent);
+    background-size: 380px 380px;
+    opacity: 0.8;
+    animation: piscarBolhas 3.5s infinite alternate ease-in-out;
     pointer-events: none;
 }
 
-@keyframes piscar {
-    0% { opacity: 0.3; } 100% { opacity: 0.9; }
+@keyframes piscarBolhas {
+    0% { opacity: 0.4; transform: translateY(0px); }
+    100% { opacity: 1; transform: translateY(-8px); }
 }
 
 .container { max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
 
 /* Cabeçalho */
 .header { text-align: center; margin-bottom: 28px; }
-.header h1 { font-size: 2.5rem; text-shadow: 0 0 15px var(--neon-green-glow); }
-.subtitulo { font-size: 1.15rem; color: var(--neon-green); font-weight: bold; text-shadow: 0 0 8px var(--neon-green-glow); }
+.header h1 { font-size: 2.5rem; text-shadow: 0 0 18px var(--hydro-blue-glow); color: #ffffff; }
+.subtitulo { font-size: 1.15rem; color: var(--hydro-blue); font-weight: bold; text-shadow: 0 0 10px var(--hydro-blue-glow); }
 .estudante-info { color: var(--text-muted); font-size: 0.95rem; margin-top: 4px; }
-.estudante-info span { color: #fff; font-weight: bold; }
+.estudante-info span { color: var(--furina-gold); font-weight: bold; text-shadow: 0 0 6px var(--furina-gold-glow); }
 
-/* Cards com Borda Lava Unificada */
+/* Cards com Borda em Estilo Oculto de Fontaine (Hydro Blue & Dourado Furina) */
 .card, .tabela-boletim tbody tr {
     position: relative;
     background: var(--card-bg);
@@ -63,28 +68,28 @@ body::before {
 
 .card { padding: 20px; margin-bottom: 24px; }
 
-/* Animação da Borda de Lava Contínua (Retangular) */
+/* Animação da Borda Hidro/Dourada */
 .card::before, .tabela-boletim tbody tr::before {
     content: "";
     position: absolute;
     inset: 0;
     border-radius: inherit;
     padding: 2px;
-    background: linear-gradient(135deg, #39ff14 0%, #8b0021 25%, #ff0055 50%, #8b0021 75%, #39ff14 100%);
+    background: linear-gradient(135deg, #00d2ff 0%, #0055ff 25%, #ffd700 50%, #0055ff 75%, #00d2ff 100%);
     background-size: 300% 300%;
-    animation: deslizarLava 8s infinite ease-in-out alternate;
+    animation: deslizarHydro 7s infinite ease-in-out alternate;
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
     pointer-events: none;
 }
 
-@keyframes deslizarLava {
+@keyframes deslizarHydro {
     0% { background-position: 0% 0%; }
     100% { background-position: 100% 100%; }
 }
 
-.card:hover { transform: translateY(-4px); box-shadow: 0 0 20px var(--neon-green-glow); }
+.card:hover { transform: translateY(-4px); box-shadow: 0 0 22px var(--hydro-blue-glow); }
 
 .cards-resumo { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px; }
 .cards-resumo .card { text-align: center; margin-bottom: 0; }
@@ -93,11 +98,11 @@ body::before {
 .subtexto { display: block; font-size: 0.75rem; color: var(--text-muted); }
 
 /* Cores de Status */
-.neon-text, .status-bom { color: var(--neon-green); text-shadow: 0 0 8px var(--neon-green-glow); }
-.status-atencao { color: var(--attention-color); text-shadow: 0 0 8px rgba(255, 42, 95, 0.6); }
+.neon-text, .status-bom { color: var(--hydro-blue); text-shadow: 0 0 10px var(--hydro-blue-glow); }
+.status-atencao { color: var(--attention-color); text-shadow: 0 0 8px rgba(255, 73, 118, 0.6); }
 
-/* Tabela com Borda Única por Linha/Matéria */
-.card-tabela h2 { font-size: 1.3rem; margin-bottom: 16px; text-shadow: 0 0 8px var(--neon-green-glow); }
+/* Tabela de Fontaine */
+.card-tabela h2 { font-size: 1.3rem; margin-bottom: 16px; text-shadow: 0 0 10px var(--hydro-blue-glow); }
 .tabela-responsive { overflow-x: auto; }
 
 .tabela-boletim {
@@ -110,9 +115,9 @@ body::before {
 .tabela-boletim th {
     padding: 12px 14px;
     text-align: left;
-    color: var(--neon-green);
+    color: var(--furina-gold);
     font-size: 0.9rem;
-    text-shadow: 0 0 5px var(--neon-green-glow);
+    text-shadow: 0 0 8px var(--furina-gold-glow);
 }
 
 .tabela-boletim tbody tr {
@@ -125,5 +130,5 @@ body::before {
 }
 
 .tabela-boletim tbody tr:hover {
-    background: rgba(57, 255, 20, 0.12);
+    background: rgba(0, 210, 255, 0.15);
 }
