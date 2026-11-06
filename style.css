@@ -1,7 +1,7 @@
 /* Variáveis de Cores e Animações */
 :root {
     --bg-degrade: linear-gradient(135deg, #021a0e 0%, #08381e 35%, #4a0817 70%, #200208 100%);
-    --card-bg: rgba(6, 38, 20, 0.75);
+    --card-bg: rgba(6, 38, 20, 0.85);
     --text-color: #ffffff;
     --text-muted: #a3b8cc;
     --neon-green: #39ff14;
@@ -93,7 +93,7 @@ body::before {
     font-weight: bold;
 }
 
-/* Cards com Borda Animada Lâmpada de Lava (Verde Neon + Vermelho Vinho girando na borda) */
+/* Cards com Borda em Estilo Lâmpada de Lava (Bolhas subindo na borda) */
 .card {
     position: relative;
     background: var(--card-bg);
@@ -107,42 +107,41 @@ body::before {
     z-index: 1;
 }
 
-/* Moldura animada da Borda estilo Lava */
+/* O gradiente da borda com efeito lava fluido subindo */
 .card::before {
     content: "";
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: conic-gradient(
-        from 0deg,
-        #39ff14 0deg,
-        #8b0000 90deg,
-        #ff0033 180deg,
-        #39ff14 270deg,
-        #8b0000 360deg
+    inset: 0;
+    border-radius: var(--radius);
+    padding: 3px; /* Espessura da Borda */
+    background: linear-gradient(
+        180deg,
+        #39ff14 0%,
+        #8b0021 25%,
+        #ff0055 50%,
+        #8b0021 75%,
+        #39ff14 100%
     );
-    animation: rodarBordaLava 6s linear infinite;
-    z-index: -2;
+    background-size: 100% 300%;
+    animation: bolhasLavaBorda 5s infinite alternate ease-in-out;
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    z-index: 2;
+    pointer-events: none;
 }
 
-/* Camada interna para dar o espaço do fundo do card */
-.card::after {
-    content: "";
-    position: absolute;
-    inset: 3px; /* Espessura da borda viva */
-    background: var(--card-bg);
-    border-radius: calc(var(--radius) - 3px);
-    z-index: -1;
-}
-
-@keyframes rodarBordaLava {
+@keyframes bolhasLavaBorda {
     0% {
-        transform: rotate(0deg);
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 0% 50%;
     }
     100% {
-        transform: rotate(360deg);
+        background-position: 0% 100%;
     }
 }
 
