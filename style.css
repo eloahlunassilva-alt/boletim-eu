@@ -1,4 +1,4 @@
-/* Tema Furina & Fontaine (Genshin Impact) */
+/* Tema Furina & Fontaine com Hydroculus Flutuantes */
 :root {
     --bg-degrade: linear-gradient(135deg, #031024 0%, #09254a 35%, #051633 70%, #010a17 100%);
     --card-bg: rgba(9, 37, 74, 0.75);
@@ -22,9 +22,10 @@ body {
     padding: 20px;
     min-height: 100vh;
     overflow-x: hidden;
+    position: relative;
 }
 
-/* Fundo com Brilhos de Bolhas e Gotas D'água (Fontaine) */
+/* Fundo com Brilhos e Bolhas */
 body::before {
     content: "";
     position: fixed;
@@ -39,11 +40,43 @@ body::before {
     opacity: 0.8;
     animation: piscarBolhas 3.5s infinite alternate ease-in-out;
     pointer-events: none;
+    z-index: 0;
 }
 
 @keyframes piscarBolhas {
     0% { opacity: 0.4; transform: translateY(0px); }
     100% { opacity: 1; transform: translateY(-8px); }
+}
+
+/* Hydroculus Girando no Fundo */
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image: 
+        radial-gradient(circle, var(--hydro-blue) 0%, rgba(0, 210, 255, 0.4) 40%, transparent 75%),
+        radial-gradient(circle, var(--hydro-blue) 0%, rgba(0, 210, 255, 0.4) 40%, transparent 75%),
+        radial-gradient(circle, var(--hydro-blue) 0%, rgba(0, 210, 255, 0.4) 40%, transparent 75%);
+    background-size: 70px 70px, 90px 90px, 60px 60px;
+    background-position: 10% 20%, 85% 60%, 25% 75%;
+    background-repeat: no-repeat;
+    filter: drop-shadow(0 0 15px var(--hydro-blue));
+    opacity: 0.6;
+    animation: girarHydroculus 12s linear infinite;
+}
+
+@keyframes girarHydroculus {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+    50% {
+        transform: rotate(180deg) scale(1.1);
+    }
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
 }
 
 .container { max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
@@ -53,9 +86,9 @@ body::before {
 .header h1 { font-size: 2.5rem; text-shadow: 0 0 18px var(--hydro-blue-glow); color: #ffffff; }
 .subtitulo { font-size: 1.15rem; color: var(--hydro-blue); font-weight: bold; text-shadow: 0 0 10px var(--hydro-blue-glow); }
 .estudante-info { color: var(--text-muted); font-size: 0.95rem; margin-top: 4px; }
-.estudante-info span { color: var(--furina-gold); font-weight: bold; text-shadow: 0 0 6px var(--furina-gold-glow); }
+.estudante-info span { color: #ffffff; font-weight: bold; }
 
-/* Cards com Borda em Estilo Oculto de Fontaine (Hydro Blue & Dourado Furina) */
+/* Cards com Borda Animada Hydro/Dourada */
 .card, .tabela-boletim tbody tr {
     position: relative;
     background: var(--card-bg);
@@ -68,7 +101,6 @@ body::before {
 
 .card { padding: 20px; margin-bottom: 24px; }
 
-/* Animação da Borda Hidro/Dourada */
 .card::before, .tabela-boletim tbody tr::before {
     content: "";
     position: absolute;
