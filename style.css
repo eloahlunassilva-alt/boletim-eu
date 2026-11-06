@@ -1,4 +1,4 @@
-/* Tema Furina & Fontaine com Estátua dos Sete e Furina Oficial */
+/* Tema Furina & Fontaine com Múltiplos Hydroculus */
 :root {
     --bg-degrade: linear-gradient(135deg, #031024 0%, #09254a 35%, #051633 70%, #010a17 100%);
     --card-bg: rgba(9, 37, 74, 0.75);
@@ -47,31 +47,29 @@ body::before {
     100% { opacity: 1; }
 }
 
-/* Hydroculus Estáticos */
+/* Base Comum dos Hydroculus Estáticos */
 .hydroculus-container {
     position: fixed;
-    width: 95px;
-    height: 95px;
+    width: 80px;
+    height: 80px;
     pointer-events: none;
     z-index: 0;
-    filter: drop-shadow(0 0 18px rgba(0, 210, 255, 0.95)) drop-shadow(0 0 35px rgba(0, 150, 255, 0.6));
+    filter: drop-shadow(0 0 14px rgba(0, 210, 255, 0.95));
 }
 
-.hydroculus-container-1 {
-    top: 20%;
-    left: 3%;
-}
-
-.hydroculus-container-2 {
-    bottom: 15%;
-    right: 4%;
-}
+/* Posições Espalhadas pelo Fundo */
+.hydroculus-1 { top: 12%; left: 3%; }
+.hydroculus-2 { top: 60%; left: 2%; transform: scale(0.8); }
+.hydroculus-3 { top: 35%; right: 4%; transform: scale(0.9); }
+.hydroculus-4 { top: 5%; right: 15%; transform: scale(0.7); }
+.hydroculus-5 { bottom: 8%; left: 18%; transform: scale(0.75); }
+.hydroculus-6 { top: 48%; left: 14%; transform: scale(0.65); opacity: 0.6; }
 
 .hydroculus-externo,
 .hydroculus-interno {
     position: absolute;
     inset: 0;
-    background: url('https://static.wikia.nocookie.net/gensin-impact/images/9/9e/Item_Hydroculus.png') no-repeat center / contain;
+    background: url('https://static.wikia.nocookie.net/gensin-impact/images/9/9e/Item_Hydroculus.png/revision/latest') no-repeat center / contain;
 }
 
 .hydroculus-externo {
@@ -84,11 +82,11 @@ body::before {
     mask-image: radial-gradient(circle at 50% 52%, black 32%, transparent 34%);
 }
 
-/* Contentor da Estátua dos Sete + Furina no canto inferior direito */
+/* Estátua dos Sete + Furina no Canto Inferior Direito */
 .estatua-furina-container {
     position: fixed;
     bottom: 0px;
-    right: 20px;
+    right: 10px;
     width: 220px;
     height: 320px;
     pointer-events: none;
@@ -98,21 +96,19 @@ body::before {
     justify-content: center;
 }
 
-/* Estátua dos Sete ao fundo */
 .estatua-dos-sete {
     position: absolute;
-    height: 300px;
+    height: 290px;
     width: auto;
     bottom: 0;
     left: 10px;
-    opacity: 0.65;
-    filter: drop-shadow(0 0 20px rgba(0, 210, 255, 0.8));
+    opacity: 0.7;
+    filter: drop-shadow(0 0 18px rgba(0, 210, 255, 0.8));
 }
 
-/* Furina posicionada à frente da Estátua */
 .furina-frente {
     position: absolute;
-    height: 240px;
+    height: 230px;
     width: auto;
     bottom: 0;
     right: 0;
