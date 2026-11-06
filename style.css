@@ -25,7 +25,7 @@ body {
     position: relative;
 }
 
-/* Fundo com Brilhos */
+/* Fundo com Brilhos Mais Intensos */
 body::before {
     content: "";
     position: fixed;
@@ -34,16 +34,20 @@ body::before {
         radial-gradient(2.5px 2.5px at 30px 40px, #ffffff, transparent),
         radial-gradient(3px 3px at 70px 110px, var(--hydro-blue), transparent),
         radial-gradient(2px 2px at 150px 50px, var(--furina-gold), transparent),
-        radial-gradient(3.5px 3.5px at 280px 210px, var(--hydro-blue), transparent);
-    background-size: 380px 380px;
-    opacity: 0.8;
-    animation: piscarBolhas 3.5s infinite alternate ease-in-out;
+        radial-gradient(3.5px 3.5px at 280px 210px, var(--hydro-blue), transparent),
+        radial-gradient(2px 2px at 200px 300px, #ffffff, transparent),
+        radial-gradient(4px 4px at 310px 90px, var(--furina-gold), transparent),
+        radial-gradient(2.5px 2.5px at 100px 240px, var(--hydro-blue), transparent);
+    background-size: 320px 320px;
+    opacity: 0.95;
+    animation: piscarBolhas 3s infinite alternate ease-in-out;
     pointer-events: none;
     z-index: 0;
 }
 
 @keyframes piscarBolhas {
-    0% { opacity: 0.4; }
+    0% { opacity: 0.3; }
+    50% { opacity: 0.7; }
     100% { opacity: 1; }
 }
 
@@ -54,16 +58,28 @@ body::before {
     height: 80px;
     pointer-events: none;
     z-index: 0;
-    filter: drop-shadow(0 0 14px rgba(0, 210, 255, 0.95));
+    filter: drop-shadow(0 0 16px rgba(0, 210, 255, 0.95));
 }
 
-/* Posições dos Hydroculus */
-.hydroculus-1 { top: 12%; left: 3%; }
-.hydroculus-2 { top: 60%; left: 2%; transform: scale(0.8); }
-.hydroculus-3 { top: 35%; right: 4%; transform: scale(0.9); }
-.hydroculus-4 { top: 5%; right: 15%; transform: scale(0.7); }
-.hydroculus-5 { bottom: 8%; left: 18%; transform: scale(0.75); }
-.hydroculus-6 { top: 48%; left: 14%; transform: scale(0.65); opacity: 0.6; }
+/* Posições dos 16 Hydroculus Espalhados */
+.hydroculus-1 { top: 6%; left: 2%; transform: scale(0.9); }
+.hydroculus-2 { top: 58%; left: 2%; transform: scale(0.85); }
+.hydroculus-3 { top: 28%; right: 2%; transform: scale(0.95); }
+.hydroculus-4 { top: 4%; right: 10%; transform: scale(0.75); }
+.hydroculus-5 { bottom: 4%; left: 14%; transform: scale(0.8); }
+.hydroculus-6 { top: 42%; left: 11%; transform: scale(0.65); opacity: 0.7; }
+.hydroculus-7 { top: 78%; right: 6%; transform: scale(0.85); }
+.hydroculus-8 { top: 18%; left: 22%; transform: scale(0.6); opacity: 0.75; }
+.hydroculus-9 { bottom: 10%; right: 18%; transform: scale(0.7); }
+.hydroculus-10 { top: 60%; right: 26%; transform: scale(0.65); opacity: 0.6; }
+
+/* Hydroculus adicionais preenchendo áreas vazias */
+.hydroculus-11 { top: 88%; left: 35%; transform: scale(0.75); opacity: 0.8; }
+.hydroculus-12 { top: 2%; left: 45%; transform: scale(0.7); opacity: 0.85; }
+.hydroculus-13 { top: 38%; right: 15%; transform: scale(0.6); opacity: 0.65; }
+.hydroculus-14 { top: 82%; left: 3%; transform: scale(0.7); opacity: 0.75; }
+.hydroculus-15 { top: 15%; right: 30%; transform: scale(0.55); opacity: 0.6; }
+.hydroculus-16 { top: 92%; right: 38%; transform: scale(0.65); opacity: 0.7; }
 
 .hydroculus-externo,
 .hydroculus-interno {
