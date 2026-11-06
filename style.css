@@ -1,4 +1,4 @@
-/* Tema Furina & Fontaine com Rotação Exclusivamente Lateral em 3D */
+/* Tema Furina & Fontaine com Elementos Estáticos */
 :root {
     --bg-degrade: linear-gradient(135deg, #031024 0%, #09254a 35%, #051633 70%, #010a17 100%);
     --card-bg: rgba(9, 37, 74, 0.75);
@@ -47,78 +47,73 @@ body::before {
     100% { opacity: 1; }
 }
 
-/* Base do Hydroculus — Flutuação vertical e giro 3D apenas lateral */
+/* Base do Hydroculus (Completamente Parados) */
 .hydroculus-container {
     position: fixed;
     width: 95px;
     height: 95px;
     pointer-events: none;
     z-index: 0;
-    perspective: 800px;
     filter: drop-shadow(0 0 18px rgba(0, 210, 255, 0.95)) drop-shadow(0 0 35px rgba(0, 150, 255, 0.6));
 }
 
 .hydroculus-container-1 {
     top: 20%;
     left: 3%;
-    animation: levitarSemInclinacao 6s infinite ease-in-out, girarApenasLado 8s infinite linear;
 }
 
 .hydroculus-container-2 {
     bottom: 15%;
     right: 4%;
-    animation: levitarSemInclinacao 8s infinite ease-in-out reverse, girarApenasLado 10s infinite linear reverse;
 }
 
-/* Camada Externa: Asas/Partículas d'água */
-.hydroculus-externo {
-    position: absolute;
-    inset: 0;
-    background: url('https://static.wikia.nocookie.net/gensin-impact/images/9/9e/Item_Hydroculus.png') no-repeat center / contain;
-    -webkit-mask-image: radial-gradient(circle at 50% 52%, transparent 32%, black 34%);
-    mask-image: radial-gradient(circle at 50% 52%, transparent 32%, black 34%);
-    animation: girarAntiHorario 12s linear infinite;
-}
-
-/* Camada Interna: Esfera central */
+.hydroculus-externo,
 .hydroculus-interno {
     position: absolute;
     inset: 0;
     background: url('https://static.wikia.nocookie.net/gensin-impact/images/9/9e/Item_Hydroculus.png') no-repeat center / contain;
+}
+
+.hydroculus-externo {
+    -webkit-mask-image: radial-gradient(circle at 50% 52%, transparent 32%, black 34%);
+    mask-image: radial-gradient(circle at 50% 52%, transparent 32%, black 34%);
+}
+
+.hydroculus-interno {
     -webkit-mask-image: radial-gradient(circle at 50% 52%, black 32%, transparent 34%);
     mask-image: radial-gradient(circle at 50% 52%, black 32%, transparent 34%);
-    animation: girarHorario 7s linear infinite;
 }
 
-/* Animação exclusiva de Giro Lateral 3D no próprio eixo Y (sem girar para cima/baixo) */
-@keyframes girarApenasLado {
-    0% {
-        transform: rotateY(0deg);
-    }
-    100% {
-        transform: rotateY(360deg);
-    }
+/* Estátua dos Sete e Furina posicionadas */
+.estatua-furina-container {
+    position: fixed;
+    bottom: 10px;
+    right: 15px;
+    width: 140px;
+    height: 220px;
+    pointer-events: none;
+    z-index: 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
 }
 
-/* Levitação vertical suave */
-@keyframes levitarSemInclinacao {
-    0%, 100% {
-        top: 20%;
-    }
-    50% {
-        top: calc(20% - 15px);
-    }
+.estatua-dos-sete {
+    position: absolute;
+    height: 180px;
+    width: auto;
+    bottom: 0;
+    opacity: 0.7;
+    filter: drop-shadow(0 0 15px rgba(0, 210, 255, 0.5));
 }
 
-/* Rotação independente do núcleo e das partículas */
-@keyframes girarHorario {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
-
-@keyframes girarAntiHorario {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(-360deg); }
+.furina-frente {
+    position: absolute;
+    height: 110px;
+    width: auto;
+    bottom: 0;
+    z-index: 1;
+    filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.7));
 }
 
 .container { max-width: 1000px; margin: 0 auto; position: relative; z-index: 1; }
