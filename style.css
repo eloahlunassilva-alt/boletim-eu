@@ -1,4 +1,4 @@
-/* Tema Furina & Fontaine com Hydroculus de Dupla Rotação 3D */
+/* Tema Furina & Fontaine com Rotação Exclusivamente Lateral em 3D */
 :root {
     --bg-degrade: linear-gradient(135deg, #031024 0%, #09254a 35%, #051633 70%, #010a17 100%);
     --card-bg: rgba(9, 37, 74, 0.75);
@@ -47,30 +47,30 @@ body::before {
     100% { opacity: 1; }
 }
 
-/* Base do Hydroculus - Controla a levitação e o giro lateral 3D */
+/* Base do Hydroculus — Flutuação vertical e giro 3D apenas lateral */
 .hydroculus-container {
     position: fixed;
     width: 95px;
     height: 95px;
     pointer-events: none;
     z-index: 0;
-    perspective: 600px;
+    perspective: 800px;
     filter: drop-shadow(0 0 18px rgba(0, 210, 255, 0.95)) drop-shadow(0 0 35px rgba(0, 150, 255, 0.6));
 }
 
 .hydroculus-container-1 {
     top: 20%;
     left: 3%;
-    animation: levitarEGirarLado 7s infinite ease-in-out;
+    animation: levitarSemInclinacao 6s infinite ease-in-out, girarApenasLado 8s infinite linear;
 }
 
 .hydroculus-container-2 {
     bottom: 15%;
     right: 4%;
-    animation: levitarEGirarLado 9s infinite ease-in-out reverse;
+    animation: levitarSemInclinacao 8s infinite ease-in-out reverse, girarApenasLado 10s infinite linear reverse;
 }
 
-/* Camada Externa: As asas/lâminas d'água (Recorte preciso do raio de 33% para fora) */
+/* Camada Externa: Asas/Partículas d'água */
 .hydroculus-externo {
     position: absolute;
     inset: 0;
@@ -80,7 +80,7 @@ body::before {
     animation: girarAntiHorario 12s linear infinite;
 }
 
-/* Camada Interna: A esfera central (Recorte preciso até o raio de 33%) */
+/* Camada Interna: Esfera central */
 .hydroculus-interno {
     position: absolute;
     inset: 0;
@@ -90,20 +90,27 @@ body::before {
     animation: girarHorario 7s linear infinite;
 }
 
-/* Giro 3D Lateral (estilo item flutuante no mapa de Genshin) */
-@keyframes levitarEGirarLado {
+/* Animação exclusiva de Giro Lateral 3D no próprio eixo Y (sem girar para cima/baixo) */
+@keyframes girarApenasLado {
     0% {
-        transform: translateY(0px) rotateY(0deg);
-    }
-    50% {
-        transform: translateY(-18px) rotateY(180deg);
+        transform: rotateY(0deg);
     }
     100% {
-        transform: translateY(0px) rotateY(360deg);
+        transform: rotateY(360deg);
     }
 }
 
-/* Rotação contínua do núcleo e das partículas */
+/* Levitação vertical suave */
+@keyframes levitarSemInclinacao {
+    0%, 100% {
+        top: 20%;
+    }
+    50% {
+        top: calc(20% - 15px);
+    }
+}
+
+/* Rotação independente do núcleo e das partículas */
 @keyframes girarHorario {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
