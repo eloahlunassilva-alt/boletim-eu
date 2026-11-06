@@ -93,7 +93,7 @@ body::before {
     font-weight: bold;
 }
 
-/* Cards com Borda Lava Deslizando Lento pelo Contorno */
+/* Cards com Borda Lava Deslizando Retilínea (sem rotação de radar) */
 .card {
     position: relative;
     background: var(--card-bg);
@@ -103,48 +103,43 @@ body::before {
     -webkit-backdrop-filter: blur(14px);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
     transition: transform 0.3s, box-shadow 0.3s;
-    overflow: hidden;
     z-index: 1;
 }
 
-/* Gradiente Angular que gira bem devagar (14 segundos) contornando todas as bordas */
+/* Borda dos Cards com Efeito Lava Fluido ao longo do retângulo */
 .card::before {
     content: "";
     position: absolute;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    background: conic-gradient(
-        from 0deg,
-        #39ff14 0deg,
-        #700018 70deg,
-        #ff0055 120deg,
-        #700018 170deg,
-        #39ff14 240deg,
-        #700018 310deg,
-        #39ff14 360deg
+    inset: 0;
+    border-radius: var(--radius);
+    padding: 3px;
+    background: linear-gradient(
+        135deg,
+        #39ff14 0%,
+        #8b0021 25%,
+        #ff0055 50%,
+        #8b0021 75%,
+        #39ff14 100%
     );
-    animation: andarLavaBorda 14s linear infinite;
-    z-index: -2;
+    background-size: 300% 300%;
+    animation: deslizarLavaRetangulo 8s infinite ease-in-out alternate;
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
 }
 
-/* Camada interna de recorte para manter o fundo transparente e deixar apenas a borda visível */
-.card::after {
-    content: "";
-    position: absolute;
-    inset: 3px; /* Espessura da borda viva */
-    background: var(--card-bg);
-    border-radius: calc(var(--radius) - 3px);
-    z-index: -1;
-}
-
-@keyframes andarLavaBorda {
+@keyframes deslizarLavaRetangulo {
     0% {
-        transform: rotate(0deg);
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 50%;
     }
     100% {
-        transform: rotate(360deg);
+        background-position: 0% 100%;
     }
 }
 
@@ -218,29 +213,64 @@ body::before {
 
 .tabela-boletim {
     width: 100%;
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0 8px; /* Espacamento para destacar cada linha/nota */
     min-width: 600px;
 }
 
-.tabela-boletim th,
-.tabela-boletim td {
+.tabela-boletim th {
     padding: 12px 14px;
     text-align: left;
-    border-bottom: 1px solid rgba(57, 255, 20, 0.15);
-}
-
-.tabela-boletim th {
     background-color: rgba(57, 255, 20, 0.08);
     color: var(--neon-green);
     font-weight: bold;
     font-size: 0.9rem;
     text-shadow: 0 0 5px var(--neon-green-glow);
+    border-bottom: 2px solid var(--neon-green);
 }
 
+/* Aplicando o mesmo estilo de borda animada Lava nas células de notas */
 .tabela-boletim td {
+    position: relative;
+    padding: 12px 14px;
     font-size: 0.95rem;
+    background: rgba(6, 38, 20, 0.6);
 }
 
-.tabela-boletim tbody tr:hover {
-    background-color: rgba(57, 255, 20, 0.12);
+.tabela-boletim tbody tr td:first-child {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+.tabela-boletim tbody tr td:last-child {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+/* Moldura Lava individual em cada nota */
+.tabela-boletim td::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1.5px;
+    border-radius: inherit;
+    background: linear-gradient(
+        135deg,
+        #39ff14 0%,
+        #8b0021 35%,
+        #ff0055 70%,
+        #39ff14 100%
+    );
+    background-size: 200% 200%;
+    animation: deslizarLavaRetangulo 6s infinite ease-in-out alternate;
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+
+.tabela-boletim tbody tr:hover td {
+    background-color: rgba(57, 255, 20, 0.15);
 }
