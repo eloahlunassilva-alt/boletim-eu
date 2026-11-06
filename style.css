@@ -1,4 +1,4 @@
-/* Tema Furina & Fontaine com Múltiplos Hydroculus */
+/* Tema Furina & Fontaine */
 :root {
     --bg-degrade: linear-gradient(135deg, #031024 0%, #09254a 35%, #051633 70%, #010a17 100%);
     --card-bg: rgba(9, 37, 74, 0.75);
@@ -47,7 +47,7 @@ body::before {
     100% { opacity: 1; }
 }
 
-/* Base Comum dos Hydroculus Estáticos */
+/* Base dos Hydroculus Estáticos */
 .hydroculus-container {
     position: fixed;
     width: 80px;
@@ -57,7 +57,7 @@ body::before {
     filter: drop-shadow(0 0 14px rgba(0, 210, 255, 0.95));
 }
 
-/* Posições Espalhadas pelo Fundo */
+/* Posições dos Hydroculus */
 .hydroculus-1 { top: 12%; left: 3%; }
 .hydroculus-2 { top: 60%; left: 2%; transform: scale(0.8); }
 .hydroculus-3 { top: 35%; right: 4%; transform: scale(0.9); }
@@ -82,37 +82,19 @@ body::before {
     mask-image: radial-gradient(circle at 50% 52%, black 32%, transparent 34%);
 }
 
-/* Estátua dos Sete + Furina no Canto Inferior Direito */
-.estatua-furina-container {
+/* Furina no Canto Inferior Direito */
+.furina-container {
     position: fixed;
     bottom: 0px;
-    right: 10px;
-    width: 220px;
-    height: 320px;
+    right: 15px;
     pointer-events: none;
     z-index: 0;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-}
-
-.estatua-dos-sete {
-    position: absolute;
-    height: 290px;
-    width: auto;
-    bottom: 0;
-    left: 10px;
-    opacity: 0.7;
-    filter: drop-shadow(0 0 18px rgba(0, 210, 255, 0.8));
 }
 
 .furina-frente {
-    position: absolute;
-    height: 230px;
+    height: 280px;
     width: auto;
-    bottom: 0;
-    right: 0;
-    z-index: 2;
+    display: block;
     filter: drop-shadow(0 0 15px rgba(0, 210, 255, 0.9)) drop-shadow(0 0 25px rgba(255, 215, 0, 0.5));
 }
 
