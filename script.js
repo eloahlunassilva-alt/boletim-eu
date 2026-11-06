@@ -5,31 +5,31 @@ const CONFIG_ALUNO = {
   apiUrl: "https://boletim-api.profbt.com.br"
 };
 
-// DADOS BRUTOS FICTÍCIOS — 9º ANO (BASE LOCAL)
+// DADOS ATUALIZADOS — TURMA 9B / NÚMERO 11
 const dadosBoletimLocal = [
-  { disciplina: "Língua Portuguesa", tri1: 78, tri2: "8,2", tri3: 8.6, faltas: [2, 2, 1] },
-  { disciplina: "Matemática", tri1: 55, tri2: "5,4", tri3: null, faltas: [3, 2, 2] },
-  { disciplina: "Ciências", tri1: 84, tri2: 7.9, tri3: "8,3", faltas: [1, 1, 1] },
-  { disciplina: "História", tri1: "7,1", tri2: 82, tri3: null, faltas: [1, 2, 1] },
-  { disciplina: "Geografia", tri1: 69, tri2: "7,5", tri3: 7.8, faltas: [0, 1, 1] },
-  { disciplina: "Língua Inglesa", tri1: 88, tri2: 8.4, tri3: null, faltas: [1, 0, 1] },
-  { disciplina: "Arte", tri1: "9,2", tri2: 87, tri3: 9.0, faltas: [1, 1, 0] },
-  { disciplina: "Educação Física", tri1: 96, tri2: "9,3", tri3: null, faltas: [0, 1, 0] },
-  { disciplina: "Educação Digital", tri1: 91, tri2: 8.9, tri3: "9,4", faltas: [1, 1, 0] },
-  { disciplina: "Educação Financeira", tri1: 76, tri2: "7,2", tri3: null, faltas: [1, 1, 1] },
-  { disciplina: "Rec. Aprend. Matemática", tri1: 58, tri2: "5,9", tri3: 6.2, faltas: [2, 2, 1] },
-  { disciplina: "Leitura Rec. Aprend. Lingua Portuguesa", tri1: 72, tri2: "7,6", tri3: null, faltas: [2, 1, 1] },
-  { disciplina: "Pensamento Lógico", tri1: 49, tri2: 5.5, tri3: "5,8", faltas: [2, 2, 2] },
-  { disciplina: "Literatura Arte e Movimento", tri1: "8,0", tri2: 84, tri3: null, faltas: [1, 1, 0] },
-  { disciplina: "Práticas Experimentais", tri1: 64, tri2: "6,6", tri3: 7.0, faltas: [1, 1, 1] }
+  { disciplina: "Língua Portuguesa", tri1: 7.8, tri2: 8.2, tri3: 8.6, faltas: [2, 2, 1] },
+  { disciplina: "Matemática", tri1: 5.5, tri2: 5.4, tri3: null, faltas: [3, 2, 2] },
+  { disciplina: "Ciências", tri1: 8.4, tri2: 7.9, tri3: 8.3, faltas: [1, 1, 1] },
+  { disciplina: "História", tri1: 7.1, tri2: 8.2, tri3: null, faltas: [1, 2, 1] },
+  { disciplina: "Geografia", tri1: 6.9, tri2: 7.5, tri3: 7.8, faltas: [0, 1, 1] },
+  { disciplina: "Língua Inglesa", tri1: 8.8, tri2: 8.4, tri3: null, faltas: [1, 0, 1] },
+  { disciplina: "Arte", tri1: 9.2, tri2: 8.7, tri3: 9.0, faltas: [1, 1, 0] },
+  { disciplina: "Educação Física", tri1: 9.6, tri2: 9.3, tri3: null, faltas: [0, 1, 0] },
+  { disciplina: "Educação Digital", tri1: 9.1, tri2: 8.9, tri3: 9.4, faltas: [1, 1, 0] },
+  { disciplina: "Educação Financeira", tri1: 7.6, tri2: 7.2, tri3: null, faltas: [1, 1, 1] },
+  { disciplina: "Rec. Aprend. Matemática", tri1: 5.8, tri2: 5.9, tri3: 6.2, faltas: [2, 2, 1] },
+  { disciplina: "Leitura Rec. Aprend. Lingua Portuguesa", tri1: 7.2, tri2: 7.6, tri3: null, faltas: [2, 1, 1] },
+  { disciplina: "Pensamento Lógico", tri1: 4.9, tri2: 5.5, tri3: 5.8, faltas: [2, 2, 2] },
+  { disciplina: "Literatura Arte e Movimento", tri1: 8.0, tri2: 8.4, tri3: null, faltas: [1, 1, 0] },
+  { disciplina: "Práticas Experimentais", tri1: 6.4, tri2: 6.6, tri3: 7.0, faltas: [1, 1, 1] }
 ];
 
-// VARIÁVEIS DE SESSÃO (EM MEMÓRIA)
+// VARIÁVEIS DE SESSÃO
 let pinSessao = "";
 let dadosAtuais = [];
 let emEdicao = false;
 
-// Função para converter e normalizar qualquer entrada de nota antiga para a escala de 0 a 10
+// Converte qualquer nota para escala 0-10
 function normalizarNota(valor) {
   if (valor === null || valor === undefined || valor === "") {
     return null;
@@ -50,7 +50,7 @@ function normalizarNota(valor) {
   return null;
 }
 
-// Formata o número da nota para exibição na tela (ex: 8.5 vira "8,5")
+// Formata nota para exibição na tabela
 function formatarNotaParaExibicao(nota) {
   if (nota === null || nota === undefined) {
     return "—";
@@ -58,7 +58,7 @@ function formatarNotaParaExibicao(nota) {
   return Number(nota).toFixed(1).replace(".", ",");
 }
 
-// Validação de nota editada pelo estudante (0 a 10, ponto/vírgula, ou vazio)
+// Validação da nota editada no formulário
 function validarNotaEditada(valorStr) {
   if (!valorStr || valorStr.trim() === "") {
     return { valido: true, valor: null };
@@ -71,23 +71,23 @@ function validarNotaEditada(valorStr) {
   return { valido: true, valor: num };
 }
 
-// Validação de faltas editadas pelo estudante (inteiro >= 0)
+// Validação de faltas editadas no formulário
 function validarFaltaEditada(valorStr) {
   if (valorStr === "" || valorStr === null || valorStr === undefined) {
-    return { valido: false, valor: null };
+    return { valido: true, valor: 0 };
   }
   const str = String(valorStr).trim();
   if (!/^\d+$/.test(str)) {
-    return { valido: false, valor: null };
+    return { valido: false, valor: 0 };
   }
   const num = parseInt(str, 10);
   if (isNaN(num) || num < 0) {
-    return { valido: false, valor: null };
+    return { valido: false, valor: 0 };
   }
   return { valido: true, valor: num };
 }
 
-// Renderização da tabela e cards de resumo
+// Renderiza boletim na tela
 function renderizarBoletim() {
   const tabelaCorpo = document.getElementById("tabela-corpo");
   tabelaCorpo.innerHTML = "";
@@ -107,13 +107,13 @@ function renderizarBoletim() {
       n3 = normalizarNota(item.tri3);
       faltasArr = Array.isArray(item.faltas) ? item.faltas : [0, 0, 0];
     } else {
-      n1 = item.nota_tri1 !== undefined ? item.nota_tri1 : null;
-      n2 = item.nota_tri2 !== undefined ? item.nota_tri2 : null;
-      n3 = item.nota_tri3 !== undefined ? item.nota_tri3 : null;
+      n1 = normalizarNota(item.nota_tri1);
+      n2 = normalizarNota(item.nota_tri2);
+      n3 = normalizarNota(item.nota_tri3);
       faltasArr = [
-        item.falta_tri1 || 0,
-        item.falta_tri2 || 0,
-        item.falta_tri3 || 0
+        Number(item.falta_tri1) || 0,
+        Number(item.falta_tri2) || 0,
+        Number(item.falta_tri3) || 0
       ];
     }
 
@@ -243,7 +243,7 @@ function renderizarBoletim() {
   document.getElementById("qtd-atencao").textContent = qtdAtencao;
 }
 
-// Inicialização de eventos da página
+// Inicialização de eventos
 document.addEventListener("DOMContentLoaded", () => {
   const btnEntrar = document.getElementById("btn-entrar");
   const inputPin = document.getElementById("input-pin");
@@ -258,7 +258,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const btnCancelar = document.getElementById("btn-cancelar");
   const msgBoletim = document.getElementById("msg-boletim");
 
-  // Ação de Login (POST abrir)
+  // Login (POST /abrir)
   async function realizarLogin() {
     const pinDigitado = inputPin.value.trim();
     if (!pinDigitado) {
@@ -305,11 +305,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const resData = await response.json();
 
-      // Guarda PIN em memória da sessão e limpa o input
       pinSessao = pinDigitado;
       inputPin.value = "";
 
-      // Trata dados recebidos da API vs dados locais
       if (resData && resData.dados && Array.isArray(resData.dados.disciplinas) && resData.dados.disciplinas.length > 0) {
         dadosAtuais = resData.dados.disciplinas;
       } else {
@@ -332,7 +330,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (e.key === "Enter") realizarLogin();
   });
 
-  // Modo de Edição
+  // Modo Edição
   btnAlterarDados.addEventListener("click", () => {
     emEdicao = true;
     btnAlterarDados.style.display = "none";
@@ -349,12 +347,11 @@ document.addEventListener("DOMContentLoaded", () => {
     renderizarBoletim();
   });
 
-  // Ação de Salvar (PUT salvar)
+  // Salvar (PUT /salvar)
   btnSalvar.addEventListener("click", async () => {
     msgBoletim.textContent = "";
     let houverErro = false;
 
-    // Limpa destaque de erros anteriores
     document.querySelectorAll(".input-edicao").forEach(inp => inp.classList.remove("input-invalido"));
 
     const novasDisciplinas = [];
@@ -427,9 +424,17 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       if (!response.ok) {
-        msgBoletim.textContent = "Não foi possível salvar as alterações. Tente novamente.";
+        const errorData = await response.json().catch(() => ({}));
+        msgBoletim.textContent = errorData.mensagem || "Não foi possível salvar na API. Dados mantidos localmente.";
         msgBoletim.className = "msg-status msg-erro";
         btnSalvar.disabled = false;
+        
+        // Atualiza a visualização local mesmo se a API recusar o salvamento remoto
+        dadosAtuais = novasDisciplinas;
+        emEdicao = false;
+        btnAlterarDados.style.display = "inline-block";
+        areaBotoesEdicao.style.display = "none";
+        renderizarBoletim();
         return;
       }
 
@@ -445,9 +450,15 @@ document.addEventListener("DOMContentLoaded", () => {
       renderizarBoletim();
 
     } catch (err) {
-      msgBoletim.textContent = "Não foi possível salvar as alterações. Tente novamente.";
+      msgBoletim.textContent = "Erro de conexão ao salvar na API. Exibindo dados salvos localmente.";
       msgBoletim.className = "msg-status msg-erro";
       btnSalvar.disabled = false;
+      
+      dadosAtuais = novasDisciplinas;
+      emEdicao = false;
+      btnAlterarDados.style.display = "inline-block";
+      areaBotoesEdicao.style.display = "none";
+      renderizarBoletim();
     }
   });
 });
