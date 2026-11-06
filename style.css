@@ -1,4 +1,4 @@
-/* Tema Furina & Fontaine com Hydroculus Flutuantes */
+/* Tema Furina & Fontaine com Hydroculus 3D em Rotação Real */
 :root {
     --bg-degrade: linear-gradient(135deg, #031024 0%, #09254a 35%, #051633 70%, #010a17 100%);
     --card-bg: rgba(9, 37, 74, 0.75);
@@ -25,7 +25,7 @@ body {
     position: relative;
 }
 
-/* Fundo com Brilhos e Bolhas */
+/* Fundo com Gotas e Brilhos de Água */
 body::before {
     content: "";
     position: fixed;
@@ -34,8 +34,7 @@ body::before {
         radial-gradient(2.5px 2.5px at 30px 40px, #ffffff, transparent),
         radial-gradient(3px 3px at 70px 110px, var(--hydro-blue), transparent),
         radial-gradient(2px 2px at 150px 50px, var(--furina-gold), transparent),
-        radial-gradient(3.5px 3.5px at 280px 210px, var(--hydro-blue), transparent),
-        radial-gradient(2px 2px at 340px 90px, #ffffff, transparent);
+        radial-gradient(3.5px 3.5px at 280px 210px, var(--hydro-blue), transparent);
     background-size: 380px 380px;
     opacity: 0.8;
     animation: piscarBolhas 3.5s infinite alternate ease-in-out;
@@ -44,38 +43,80 @@ body::before {
 }
 
 @keyframes piscarBolhas {
-    0% { opacity: 0.4; transform: translateY(0px); }
-    100% { opacity: 1; transform: translateY(-8px); }
+    0% { opacity: 0.4; }
+    100% { opacity: 1; }
 }
 
-/* Hydroculus Girando no Fundo */
+/* Container que segura os 2 Hydroculus no Fundo */
 body::after {
     content: "";
     position: fixed;
     inset: 0;
     pointer-events: none;
     z-index: 0;
-    background-image: 
-        radial-gradient(circle, var(--hydro-blue) 0%, rgba(0, 210, 255, 0.4) 40%, transparent 75%),
-        radial-gradient(circle, var(--hydro-blue) 0%, rgba(0, 210, 255, 0.4) 40%, transparent 75%),
-        radial-gradient(circle, var(--hydro-blue) 0%, rgba(0, 210, 255, 0.4) 40%, transparent 75%);
-    background-size: 70px 70px, 90px 90px, 60px 60px;
-    background-position: 10% 20%, 85% 60%, 25% 75%;
-    background-repeat: no-repeat;
-    filter: drop-shadow(0 0 15px var(--hydro-blue));
-    opacity: 0.6;
-    animation: girarHydroculus 12s linear infinite;
 }
 
-@keyframes girarHydroculus {
+/* Estrutura do Hydroculus (Formato de Gota Teardrop em 3D) */
+.hydroculus {
+    position: fixed;
+    width: 50px;
+    height: 70px;
+    background: linear-gradient(135deg, #00ffff 0%, #0088ff 50%, #0044aa 100%);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    transform-style: preserve-3d;
+    box-shadow: 
+        0 0 25px var(--hydro-blue),
+        inset 0 0 15px #ffffff;
+    filter: drop-shadow(0 0 12px rgba(0, 210, 255, 0.9));
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Núcleo luminoso interior do Hydroculus */
+.hydroculus::before {
+    content: "";
+    position: absolute;
+    inset: 12px 10px 18px 10px;
+    background: #ffffff;
+    border-radius: 50%;
+    box-shadow: 0 0 15px #ffffff, 0 0 30px var(--hydro-blue);
+}
+
+/* Anéis externos do Hydroculus */
+.hydroculus::after {
+    content: "";
+    position: absolute;
+    inset: -8px;
+    border: 2px solid var(--hydro-blue);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    box-shadow: 0 0 10px var(--hydro-blue);
+}
+
+/* Hydroculus Esquerdo */
+.hydroculus-1 {
+    top: 25%;
+    left: 5%;
+    animation: flotarEGirarHydroculus 8s infinite linear;
+}
+
+/* Hydroculus Direito */
+.hydroculus-2 {
+    bottom: 20%;
+    right: 6%;
+    animation: flotarEGirarHydroculus 10s infinite linear reverse;
+}
+
+/* Animação: Rotação no próprio eixo Y (estilo item coletável do Genshin) + Levitação */
+@keyframes flotarEGirarHydroculus {
     0% {
-        transform: rotate(0deg) scale(1);
+        transform: translateY(0px) rotateY(0deg) rotateZ(15deg);
     }
     50% {
-        transform: rotate(180deg) scale(1.1);
+        transform: translateY(-18px) rotateY(180deg) rotateZ(15deg);
     }
     100% {
-        transform: rotate(360deg) scale(1);
+        transform: translateY(0px) rotateY(360deg) rotateZ(15deg);
     }
 }
 
@@ -88,7 +129,7 @@ body::after {
 .estudante-info { color: var(--text-muted); font-size: 0.95rem; margin-top: 4px; }
 .estudante-info span { color: #ffffff; font-weight: bold; }
 
-/* Cards com Borda Animada Hydro/Dourada */
+/* Cards com Borda Lava Hydro/Dourada */
 .card, .tabela-boletim tbody tr {
     position: relative;
     background: var(--card-bg);
