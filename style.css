@@ -1,4 +1,4 @@
-/* Tema Furina & Fontaine com Hydroculus Realista */
+/* Tema Furina & Fontaine com Hydroculus Oficial */
 :root {
     --bg-degrade: linear-gradient(135deg, #031024 0%, #09254a 35%, #051633 70%, #010a17 100%);
     --card-bg: rgba(9, 37, 74, 0.75);
@@ -25,7 +25,7 @@ body {
     position: relative;
 }
 
-/* Fundo com Brilhos e Gotas */
+/* Fundo com Brilhos */
 body::before {
     content: "";
     position: fixed;
@@ -47,61 +47,35 @@ body::before {
     100% { opacity: 1; }
 }
 
-/* Hydroculus Realista (Gota de Água com Anéis Hydro) */
+/* Hydroculus Oficial Flutuante */
 .hydroculus {
     position: fixed;
-    width: 70px;
-    height: 85px;
+    width: 90px;
+    height: auto;
     pointer-events: none;
     z-index: 0;
-    opacity: 0.75;
-    filter: drop-shadow(0 0 16px rgba(0, 210, 255, 0.9)) drop-shadow(0 0 30px rgba(0, 150, 255, 0.5));
+    filter: drop-shadow(0 0 18px rgba(0, 210, 255, 0.9)) drop-shadow(0 0 35px rgba(0, 150, 255, 0.6));
 }
 
 .hydroculus-1 {
-    top: 22%;
-    left: 4%;
-    animation: flotarEGirar 7s infinite ease-in-out;
+    top: 20%;
+    left: 3%;
+    animation: flotarEGirar 8s infinite ease-in-out;
 }
 
 .hydroculus-2 {
-    bottom: 18%;
-    right: 5%;
-    animation: flotarEGirar 9s infinite ease-in-out reverse;
+    bottom: 15%;
+    right: 4%;
+    animation: flotarEGirar 10s infinite ease-in-out reverse;
 }
 
-/* Desenho do Hydroculus em SVG Puro via CSS */
-.hydroculus::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-color: var(--hydro-blue);
-    -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120"><path d="M50 5 C50 5 10 50 10 80 A40 40 0 0 0 90 80 C90 50 50 5 50 5 Z M50 35 A22 22 0 1 1 49.9 35 Z" fill="black"/><circle cx="50" cy="78" r="14" fill="none" stroke="black" stroke-width="5"/><path d="M25 65 A30 30 0 0 1 75 65" fill="none" stroke="black" stroke-width="4"/></svg>') no-repeat center / contain;
-    mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 120"><path d="M50 5 C50 5 10 50 10 80 A40 40 0 0 0 90 80 C90 50 50 5 50 5 Z M50 35 A22 22 0 1 1 49.9 35 Z" fill="black"/><circle cx="50" cy="78" r="14" fill="none" stroke="black" stroke-width="5"/><path d="M25 65 A30 30 0 0 1 75 65" fill="none" stroke="black" stroke-width="4"/></svg>') no-repeat center / contain;
-    background: linear-gradient(180deg, #e0f7ff 0%, #00d2ff 40%, #0055ff 100%);
-}
-
-/* Núcleo Luminoso Central */
-.hydroculus::after {
-    content: "";
-    position: absolute;
-    top: 58%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 22px;
-    height: 22px;
-    background: #ffffff;
-    border-radius: 50%;
-    box-shadow: 0 0 12px #ffffff, 0 0 24px var(--hydro-blue);
-}
-
-/* Animação: Rotação no próprio eixo (Spin 3D) + Levitação */
+/* Animação: Levitação e Rotação 3D no próprio eixo */
 @keyframes flotarEGirar {
     0% {
         transform: translateY(0px) rotateY(0deg);
     }
     50% {
-        transform: translateY(-16px) rotateY(180deg);
+        transform: translateY(-18px) rotateY(180deg);
     }
     100% {
         transform: translateY(0px) rotateY(360deg);
@@ -117,7 +91,7 @@ body::before {
 .estudante-info { color: var(--text-muted); font-size: 0.95rem; margin-top: 4px; }
 .estudante-info span { color: #ffffff; font-weight: bold; }
 
-/* Cards com Borda Animada Hydro/Dourada */
+/* Cards com Borda Lava Hydro/Dourada */
 .card, .tabela-boletim tbody tr {
     position: relative;
     background: var(--card-bg);
